@@ -1,2 +1,19 @@
 @import 'tailwind';
 
+.wrapper-enter {
+  opacity: 0;
+}
+
+.wrapper-enter.wrapper-enter-active {
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+}
+
+.wrapper-leave {
+  opacity: 1;
+}
+
+.wrapper-leave.wrapper-leave-active {
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}

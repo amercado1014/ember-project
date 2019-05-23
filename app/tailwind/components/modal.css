@@ -1,0 +1,7 @@
+.modal-wrapper {
+  @apply .fixed .pin .z-50 .overflow-auto .bg-smoke-dark .flex;
+}
+
+.modal {
+  @apply .relative .p-8 .bg-white .w-full .max-w-md .m-auto .flex-col .flex;
+}

@@ -1,26 +1,36 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | post-details', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  hooks.beforeEach(function() {
+    this.post = {
+      userId: 1,
+      id: 1,
+      title: 'test-title',
+      body: 'test-body'
+    };
+  });
 
-    await render(hbs`<PostDetails />`);
+  test('should display post details', async function(assert) {
+    await render(hbs`<PostDetails @post={{this.post}} />`);
+    assert.equal(
+      this.element.querySelector('.post-title').textContent.trim(),
+      'test-title',
+      'Title: test-title'
+    );
+  });
 
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
-    await render(hbs`
-      <PostDetails>
-        template block text
-      </PostDetails>
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+  test('should display modal', async function(assert) {
+    await render(hbs`<PostDetails @post={{this.post}} />`);
+    await click('.post-title');
+    assert.equal(
+      this.element.querySelector('.post-body').textContent.trim(),
+      'test-body',
+      'Body: test-body'
+    );
   });
 });
